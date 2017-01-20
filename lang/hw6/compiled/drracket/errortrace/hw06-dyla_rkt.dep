@@ -1,0 +1,1 @@
+("6.6" ("6dfeac024f6fe673f3d40aa50d2e25a6a2b7a4af" . "1dab18f11e34dc7f7435aaeabc29161ec2e93e4e") #"/Users/danny/school/lang/hw6/hw06-env-values.rkt" (collects #"eopl" #"eopl.rkt") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

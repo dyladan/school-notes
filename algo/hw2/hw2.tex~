@@ -1,0 +1,65 @@
+% Created 2016-09-21 Wed 14:56
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\usepackage{geometry,listings,amsmath,amssymb,amsthm}
+\author{Daniel Dyla}
+\date{\today}
+\title{CSE 361 HW-1}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{3-2 Relative asymptotic growths}
+\label{sec-1}
+
+Indicate, for each pair of expressions $(A,B)$ in the table below,
+whether A is O, \textit{o}, $\Omega$, $\omega$, or $\Theta$ of B. Assume $k \leq 1,
+\epsilon > 0, c > 1$ are constants. Your answer should be in the form
+of the table with "yes" or "no" written in each box.
+
+\begin{center}
+\begin{tabular}{ll|lllll}
+A & B & O & \textit{o} & $\Omega$ & $\omega$ & $\Theta$\\
+\hline
+$\lg$$^{\text{k}}$(n) & n$^{\epsilon}$ &  &  &  &  & \\
+n$^{\text{k}}$ & c$^{\text{n}}$ &  &  &  &  & \\
+\sqrt{n} & n$^{\text{sin(n)}}$ &  &  &  &  & \\
+2$^{\text{n}}$ & 2$^{\text{n/2}}$ &  &  &  &  & \\
+n$^{\lg\text{(c)}}$ & c$^{\lg\text{(n)}}$ &  &  &  &  & \\
+$\lg$(n!) & $\lg$(n$^{\text{n}}$) &  &  &  &  & \\
+\end{tabular}
+\end{center}
+
+\section{3-3 Ordering by asymptotic growth rates}
+\label{sec-2}
+
+\begin{itemize}
+\item Rank the following functions by order of growth; that is, find an
+arrangement $g_1, g_2,...,g_{30}$ of the functions satisfying $g_1 \in
+   \Omega(g_2), g_2 \in \Omega(g_3),...,g_{29} \in \Omega(g({30})$. Partition
+your list into equivalence classes such that the functions $f(n)$
+and $g(n)$ are in the same class if and only if $f(n) \in
+   \Theta(g(n))$.
+\end{itemize}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,510 @@
+#+TITLE: CSE 361 Lecture Notes
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall
+
+* Sums
+
+** Sum of constant
+
+#+BEGIN_LaTeX
+\begin{align}
+\sum_{i=k}^n c &= c + c + c + c + ... + c \\
+&= n - k + 1
+\end{align}
+#+END_LaTeX
+
+** Sum of integers
+
+#+BEGIN_LaTeX
+\begin{align}
+\sum_{i=0}^n i &= 0 + 1 + 2 + 3 + ... + n \\
+&= \frac{n(n+1)}{2}
+\end{align}
+#+END_LaTeX
+
+** Sum of squares
+
+#+BEGIN_LaTeX
+\begin{align}
+\sum_{i=0}^n i^2 &= 0 + 1 + 4 + 9 + ... + n^2 \\
+&= \frac{n(n+1)(2n+1)}{3}
+\end{align}
+#+END_LaTeX
+
+
+* Complexity
+
+- Big Theta has upper and lower bound
+- Big Omega has lower bound
+- Big Oh (Omnicron) has upper bound
+
+* Recursive Complexity
+
+1. Take the base case
+2. Take other cases
+3. Expand and solve
+
+** Simple Case
+
+How many times is the function $f()$ run?
+
+#+BEGIN_SRC python
+  def r(n):
+    f()
+    if n == 1:
+      return 5
+    else:
+      return r(n-1)
+#+END_SRC
+
+#+BEGIN_LaTeX
+  \[ T(n) = 
+  \begin{cases}
+  1 & n = 1 \\
+  1 + T(n-1) & else \\
+  \end{cases}
+  \]
+
+  \begin{align}
+    T(n) &= 1 + T(n-1) \\
+    &= 1 + 1 + T(n-2) \\
+    &= 1 + 1 + 1 + T(n-3) \\
+    &= 1 + 1 + 1 + 1 + T(n-4) \\
+    &= 1 + 1 + 1 + 1 + ... + 1 \\
+    &= n
+  \end{align}
+#+END_LaTeX
+
+** More Complex Case
+
+How many times is the function $f()$ run?
+
+#+BEGIN_SRC python
+  def r(n):
+    f()
+    if n == 1:
+      return 5
+    else:
+      return r(n/2)
+#+END_SRC
+
+#+BEGIN_LaTeX
+  \[ T(n) = 
+  \begin{cases}
+  1 & n = 1 \\
+  1 + T(n/2) & else \\
+  \end{cases}
+  \]
+
+  \begin{align}
+    T(n) &= 1 + T(n/2) \\
+    &= 1 + (1 + T(n/4)) \\
+    &= 1 + (1 + (1 + T(n/8))) \\
+    &= 1 + \log_2 n
+  \end{align}
+#+END_LaTeX
+
+* prove 2n^3 - n^2 + n -2 \in \Theta(n^3)
+
+Claim: there is a C_1, C_2, n_0 such that $C_1 n^3 <= 2n^3 - n^2 + n
+-2<= C_2 n^3 \forall n >= n_0$
+
+C_1 = 1, C_2 = 3, n_0 = 2
+
+* Analyze the function
+
+#+BEGIN_SRC python
+  def mystery(n):
+      t = 0
+      for i in range(1, n+1):
+          s = 1
+          for j in range(1, n+1):
+              s = s * j
+          t = t + s
+      return t
+
+  mystery(5)
+#+END_SRC
+
+#+RESULTS:
+: 600
+
+** What does it do?
+
+The sum of all factorials from 0 to n.
+
+- The inner loop computes factorials
+- The outer loop sums those factorials
+
+** Runtime
+
+#+BEGIN_LaTeX
+  \begin{align}
+    T(n) &= 1 + \sum_{i=1}^{n}(2 + \sum_{j=1}^{n} 1) \\
+    &= 1 + \sum_{i=1}^{n} (2+n) \\
+    &= 1 + n(2+n) \\
+    &= n^2 + 2n + 1 \\
+    &\in \Theta(n^2)
+  \end{align}
+#+END_LaTeX
+
+* Lecture 5
+
+Mostly we talked about HW-1 today. See hw1.org.
+
+** Problem
+
+Given an increasing function $f(x)$, defined for non-negative x, and a
+number $T$, find a number $z \in [0,\infinity]$, such that $f(z) =
+T$. $f$ is expensive.
+
+#+BEGIN_SRC python
+  def increase(n):
+      return 2 * n
+
+  def binsearch(f, T, a, b, e=0.1):
+      while 1:
+          m = (float(a) + b) / 2
+          fm = f(m)
+          err = (fm - T) ** 2
+          if (err < e ** 2):
+              return fm
+          elif fm < T:
+              a = m
+          else:
+              b = m
+
+  def find_z(f, T, e=0.1):
+      a, b = 0, 1
+      while (f(b) < T):
+          a = b
+          b = increase(b)
+      
+      z = binsearch(f, T, a, b)
+      return z
+#+END_SRC
+
+Initial search runs in $f'(T)$. Binary search runs in
+$log_2((b-a)/\epsilon)$.
+
+#+BEGIN_LaTeX
+  \begin{align}
+    R(f, T) &= \log_2(f'(T)) + \log_2(\frac{b-a}{\epsilon}) \\
+    &= \log_2(f'(T)) + \log_2(\frac{\frac{f'(T)}{2}}{\epsilon}) \\
+    &\in \Theta(\log_2(f'(T)))
+  \end{align}
+#+END_LaTeX
+
+* Lecture 6
+
+Given an array of real numbers, find a contiguous subarray with the
+largest possible sum.
+
+#+BEGIN_SRC python
+  def A0(l):
+      n = len(l)
+      large = l[0]
+      for i in range(n):
+          for j in range(i,n):
+              large = max(large, sum(l[i:j+1]))
+      return large
+
+  l = [1, 3, 4, 2, -7, 5]
+  A0(l)
+#+END_SRC
+
+#+RESULTS:
+: 10
+
+#+BEGIN_SRC python
+  def A1(l):
+      n,largest = len(l),0
+      for i in range(n):
+          s = 0
+          for j in range(i,n):
+              s += l[j]
+              largest = max(s,largest)
+      return largest
+
+  A1(l)
+
+#+END_SRC
+
+#+RESULTS:
+: 10
+
+#+BEGIN_SRC python
+  def A2(l):
+      c = [0]
+      for i in range(len(l)):
+          c.append(c[i] + l[i])
+      largest = 0
+      for i in range(len(l)):
+          for j in range(i, len(l)):
+              s = c[j+1] - c[i]
+              largest = max(s, largest)
+      return largest
+
+              
+
+  A2(l)
+#+END_SRC
+
+#+RESULTS:
+: 10
+
+#+BEGIN_SRC python
+  def A3(a):
+      n = len(a)
+      m = n//2
+      a1 = a[:n]
+      a2 = a[n:]
+      l = n-1
+      r = n
+      c = [0]
+      for i in range(n):
+          c.append(c[i]+a[i])
+      
+#+END_SRC
+
+#+BEGIN_SRC python
+  def A4(a):
+      mf, mh = 0, 0
+      for i in a:
+          mh = max(mh+i, 0)
+          mf = max(mf,mh)
+      return mf
+
+  A4(l)
+#+END_SRC
+
+#+RESULTS:
+: 10
+
+** Homework
+
+maximum product of 3 elements in the array
+
+* Lecture 7
+
+* Test 1 Prep
+
+- Verify Strassen at least once before the test
+- if T(m) >= T'(m), then T(m) \in \Omega(T'(m))
+- if T(m) <= T'(m), then T(m) \in \Omicron(T'(m))
+
+* Exam
+
+** Page 2
+
+Count the arithmetic operations
+
+sum from 0 to n-1
+
+Don't forget T(n) where n is the length of the array
+
+** Page 3
+
+It evaluates the polynomial at x
+
+Code is efficient because it is in \Theta(n) where the natural way to
+evaluate polynomials is in \Theta(n^2)
+
+Horner's algorithm
+
+9 = C(10^4)^{7/2}; 9 = C10^14; C = 9x10^-14; x = C10^14
+Solve for x
+
+** Page 4
+
+Efficient algorithms for the maximum subarray problem by distance 
+
+"kadane's algorithm"
+
+#+BEGIN_SRC python
+  m = 0
+  subarray = [[0]]
+  for each row r1 in matrix:
+      for each element e1 in r1:
+          for each row r2 below r1:
+              for each element e2 right of e1:
+                  s = 0
+                  for each row r3 from r2 to the end:
+                      for each element e3 from e2 to the end:
+                          s += a[r3,e3]
+                  if s > m:
+                      m = s
+                      subarray = submatrix(r1,r2,e1,e2)
+#+END_SRC
+
+#+BEGIN_SRC python
+  def msum(a):
+      m = len(a) # row
+      n = len(a[0]) # col
+      best = a[0][0]
+      idxs = [0,0,0,0]
+      for tlrow in range(m):
+          for tlcol in range(n):
+              for brrow in range(tlrow,m):
+                  for brcol in range(tlcol,n):
+                      s=arrsum(a,tlrow,tlcol,brrow,brcol)
+                      if s > best:
+                          best,idxs = s, [tlrow,tlcol,brrow,brocl]
+      return best
+
+  def arrsum(a,tlr,tlc,brr,brc):
+      s = 0
+      for i in range(tlr,brr+1):
+          for j in range(trc,brc+1):
+              s += a[i][j]
+      return s
+
+  arrsum([[1,2][3,4]],0,0,1,1)
+#+END_SRC
+
+Count # of times "s += a[i][j] is called
+
+** Page 5
+
+All true
+
+set {g(n) | \exist c, n_0>0 g(n) \leq cf(n), \forall n \geq n_0}
+
+set {g(n) | \exist c, n_0>0 g(n) \geq cf(n), \forall n \geq n_0}
+
+#+BEGIN_LaTeX
+  \[ T(n) = 
+  \begin{cases}
+    1 & n \leq 1 \\
+    1 + T(n-1) + T(n-2) & else \\
+  \end{cases}
+  \]
+
+  T(n) = T(n-1) + T(n-2) + 1
+  \leq 2T(n-2)+1
+
+#+END_LaTeX
+
+* Lecture 8
+
+** Shell Sort
+
+#+BEGIN_SRC python
+  gaps = [23, 10, 5, 1]
+
+  def gapISort(lst,start,gap):
+      for i in range(start+gap, len(lst), gap):
+          v = lst[i]
+          p = i
+          while p >= gap and lst[p-gap] > v:
+              lst[p] = lst[p-gap]
+              p = p - gap
+          lst[p] = v
+          print lst
+
+  def shellSort(lst):
+      for gap in [23,10,5,1]:
+          for i in range(gap):
+              gapISort(lst, i, gap)
+      return lst
+
+  shellSort([42,12,43,64,13,354,64,13,34,646,4523,31])
+#+END_SRC
+
+#+RESULTS:
+| 12 | 13 | 13 | 31 | 34 | 42 | 43 | 64 | 64 | 354 | 646 | 4523 |
+
+** Abstract Sort
+
+Linear search the array for the smallest element. Put that smallest
+element at the beginning of the new sorted array and delete it from
+the unsorted array. Do this until the original array is empty.
+
+** min-heap sort
+
+
+For each element in the array, insert that element into a
+minheap. For each element in a minheap, insert it into the original
+array in order.
+
+#+BEGIN_SRC python
+  def heapsort(a):
+      n = len(a)
+      h = newheap(n)
+      for i in range(n):
+          insert(h,a[i])
+      for i in range(n):
+          a[i] = extractsmallest(h)
+      return a
+#+END_SRC
+
+YOU MAY WANT TO THINK ABOUT WHAT IS YOUR HEAP GOING TO LOOK LIKE WHEN
+YOU ARE LOOKING AT THE ARRAY IN REVERSE ORDER
+
+
+** TODO Research Merge Sort
+
+** Quicksort
+
+#+BEGIN_SRC python
+  def qsort(a, l=0, u=None):
+      n = len(a)
+      if u is None:
+          u = n-1
+      if n <= 1:
+          return a
+      i = partition(a, l, u)
+      a = qsort(a, 0, i) + qsort(a,i,u)
+      return a
+
+  def partition(a,l,u):
+      t = a[l]
+      m = l
+      for i in range(l+1,u+1):
+          if a[i] < t:
+              m = m+1
+              a[i], a[m] = a[m], a[i]
+          a[m], a[l] = a[l], a[m]
+          return m
+#+END_SRC
+
+* Lecture 9
+
+Get a random element from a pipe of unknown length using as little
+storage as possible.
+
+#+BEGIN_SRC python
+  import random
+
+  def getrand(l):
+          n = 0
+          c = None
+          for e in l:
+                  n += 1
+                  r = random.randint(1, n)
+                  if r == 1:
+                          c = e
+          return c
+
+  getrand(range(11))
+#+END_SRC
+
+#+RESULTS:
+: 8
+
+** Optimal Sort
+
+We cannot do any better than n\lgn
+
+#+BEGIN_SRC python
+  def 3sort(l):
+      if l[0] > l[1]:
+          swap(l,0,1)
+      if l[1] > l[2]:
+          swap(l,1,2)
+      if l[0] > l[1]:
+          swap(l,0,1)
+
+#+END_SRC

@@ -1,0 +1,85 @@
+% Created 2016-09-10 Sat 12:07
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{Daniel Dyla}
+\date{\today}
+\title{CSE 361 HW-0}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{1.2-1}
+\label{sec-1}
+
+Give an example of an application that requires algorithmic content at
+the application level, and discuss the function of the algorithms
+involved.
+
+
+An application that manages students for a classroom might require
+algorithmic content at the application level. It could use a sorting
+algorithm to sort students alphabetically by name for attendance, or a
+random shuffling algorithm in order to assign random seats to the
+students in the class.
+
+\section{1.2-2}
+\label{sec-2}
+
+Suppose we are comparing implementations of insertion sort and merge
+sort on the same machine. For inputs of size n, insertion sort runs in
+$8n^2$ steps, while merge sort runs in $64 n \lg n$ steps. For which
+values of n does insertion sort beat merge sort?
+
+
+Insertion sort beats merge sort when $2 <= n <= 6$ (where n is an
+integer)
+
+\section{1.2-3}
+\label{sec-3}
+
+3 What is the smallest value of n such that an algorithm whose running
+time is $100n^2$ runs faster than an algorithm whose running time is
+$2^n$ on the same machine?
+
+
+Assuming n can ony be an integer, the smallest value of n where
+$100n^2$ is faster than $2^n$ is 15.
+
+\section{Table of values}
+\label{sec-4}
+
+\begin{center}
+\begin{tabular}{lrrrrrrr}
+ & 1 second & 1 minute & 1 hour & 1 day & 1 month & 1 year & 1 century\\
+\hline
+lg(n) & e$^{\text{1e6}}$ & e$^{\text{60e6}}$ & e$^{\text{3.6e9}}$ & e$^{\text{86.4e9}}$ & e$^{\text{2.59e12}}$ & e$^{\text{946e12}}$ & e$^{\text{94.6e15}}$\\
+sqrt(n) & 1*10$^{\text{12}}$ & 3.6\,(15) & 12.0\,(18) & 7.46\,(21) & 6.72\,(24) & 895\,(27) & 8.95\,(33)\\
+n & 1\,(6) & 60\,(6) & 3.60\,(9) & 86.4\,(9) & 2.59\,(12) & 946\,(12) & 94.6\,(15)\\
+n lg n & 87.8\,(3) & 3.95\,(6) & 189\,(6) & 3.91\,(9) & 102\,(9) & 30.5\,(12) & 2.66\,(15)\\
+n$^{\text{2}}$ & 1000 & 7746 & 60\,(3) & 294\,(3) & 1.61\,(6) & 30.7\,(6) & 307\,(6)\\
+n$^{\text{3}}$ & 100 & 391 & 1532 & 4420 & 13700 & 98\,(3) & 455\,(3)\\
+2$^{\text{n}}$ & 19 & 25 & 31 & 36 & 41 & 49 & 56\\
+n! & 9 & 11 & 12 & 14 & 15 & 17 & 18\\
+\end{tabular}
+\end{center}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

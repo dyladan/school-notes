@@ -1,0 +1,128 @@
+#lang racket
+(define firsts
+  (lambda (l)
+    (map car l)))
+
+(define f2
+  (lambda (l)
+    (cond
+      ((null? l) '())
+      (else (cons (caar l) (f2 (cdr l)))))))
+
+(define insertR
+  (lambda (new old lat)
+    (cond
+      ((null? lat)
+       '())
+      ((eq? (car lat) old)
+       (cons (car lat) (cons new (cdr lat))))
+      (else
+       (cons (car lat) (insertR new old (cdr lat)))))))
+
+(define subst
+  (lambda (new old lat)
+    (cond
+      ((null? lat)
+       '())
+      ((eq? old (car lat))
+       (cons new (cdr lat)))
+      (else
+       (cons (car lat) (subst new old (cdr lat)))))))
+
+(define multirember
+  (lambda (a lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) a)
+       (multirember a (cdr lat)))
+      (else
+       (cons (car lat) (multirember a (cdr lat)))))))
+
+(define multiinsertR
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) old)
+       (cons old (cons new (multiinsertR new old (cdr lat)))))
+      (else
+       (cons (car lat) (multiinsertR new old (cdr lat)))))))
+
+(define multiinsertL
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) old)
+       (cons new (cons old (multiinsertL new old (cdr lat)))))
+      (else
+       (cons (car lat) (multiinsertL new old (cdr lat)))))))
+
+(define multisubst
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      ((eq? (car lat) old)
+       (cons new (multisubst new old (cdr lat))))
+      (else
+       (cons (car lat) (multisubst new old (cdr lat)))))))
+
+(define plus
+  (lambda (a b)
+    (cond
+      ((zero? a) b)
+      (else (plus (sub1 a) (add1 b))))))
+
+(define minus
+  (lambda (a b)
+    (cond
+      ((zero? b) a)
+      (else
+       (minus (sub1 a) (sub1 b))))))
+
+(define addtup
+  (lambda (tup)
+    (if
+      (null? tup) 0
+      (+ (car tup) (addtup (cdr tup))))))
+
+(define times
+  (lambda (a b)
+    (cond
+      ((zero? b) 0)
+      (else
+       (+ a (times a (sub1 b)))))))
+
+(define tup+
+  (lambda (t1 t2)
+    (cond
+      ((null? t1) t2)
+      ((null? t2) t1)
+      (else
+       (cons (+ (car t1) (car t2)) (tup+ (cdr t1) (cdr t2)))))))
+
+(define gt
+  (lambda (a b)
+    (cond
+      ((= a 0) #f)
+      ((= b 0) #t)
+      (else
+       (gt (sub1 a) (sub1 b))))))
+
+(firsts '((apple) (plum pear) (grape juice)))
+(f2 '((apple) (plum pear) (grape juice)))
+(insertR 'fresh 'want (insertR 'juice 'apple '(I want apple)))
+(subst 'pear 'apple '(I want apple juice))
+(multirember 'um '(I um want um some apple juice))
+(multiinsertR 'fried 'fish '(chips and fish or fish and fried))
+(multiinsertL 'fried 'fish '(chips and fish or fish and fried))
+(multisubst 'ah 'um '(I um want um some apple juice))
+(plus 87 3)
+(minus 87 3)
+(addtup '(3 5 2 8))
+(addtup '(15 6 7 12 3))
+(times 3 4)
+(tup+ '(3 6 9 11 4) '(8 5 2 0 7))
+(tup+ '(3 6 9 11 4 11) '(8 5 2 0 7))
+(gt 1 0)
+(gt 0 0)
+(gt 1 1)
+(gt 0 1)

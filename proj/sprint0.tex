@@ -1,0 +1,402 @@
+% Created 2016-09-18 Sun 21:37
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\date{\today}
+\title{Aces Sprint \#0 Documentation}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{The Team}
+\label{sec-1}
+
+\subsection{Daniel Dyla}
+\label{sec-1-1}
+
+Daniel is a strong coder with an extensive programming background
+using multiple programming languages and an experienced system
+administrator. His core strength is in learning new technologies
+quickly and adapting them for use.
+
+Daniel will be the sprint master for sprint \#1, as well as acting as
+software engineer for the web and server components. He will also be
+helping to design the protocol for use by the application.
+
+\subsection{Gjergji Heqimi}
+\label{sec-1-2}
+
+Gjergi Heqimi is a proficient programmer in Java, C++, and C
+programming languages, as well as decently skilled with Python.
+
+Gjergji will be acting as a software engineer for the desktop client
+for sprint \#1.
+
+\subsection{Anthony Hewins}
+\label{sec-1-3}
+
+Anthony Hewins is proficient in Java, as well as reasonably familiar
+with some other programming languages. He has a strong math background
+and is very good at research.
+
+Anthony will be acting as a software engineer for the server
+component, in addition to helping Daniel design the chat protocol that
+the application will use.
+
+\subsection{Joshua Lindsay}
+\label{sec-1-4}
+
+Joshua Lindsay understands various programming languages including
+HTML, CSS, and C. He is very organized with files and data and is a
+proficient researcher.
+
+Joshua will be acting as the user interface designer for sprint \#1
+
+\subsection{Ryan Richardson}
+\label{sec-1-5}
+
+Ryan Richardson is competent in Java and C++.
+
+For sprint \#1, Ryan will be acting as an interface developer for the
+desktop user interface.
+
+\subsection{Nathalie Tate}
+\label{sec-1-6}
+
+Nathalie Tate is an intermediate programmer with experience with a few
+different programming languages. She is also a competent system
+administrator.
+
+For sprint \#1, Nathalie will be working on the user interface deisgn,
+as well as acting as the interface developer for the web component.
+
+\section{Rejected Projects}
+\label{sec-2}
+
+\subsection{Symmetric Key Encryption Module}
+\label{sec-2-1}
+
+Rejected because it requires too much specialized knowledge to
+implement properly, as well as being too narrowly focused.
+
+\subsection{Beer Rating and Recommendation App}
+\label{sec-2-2}
+
+Rejected because a portion of the team is not yet 21 years of age,
+limiting its usefulness to some members of the team.
+
+\subsection{Parking Monitor App}
+\label{sec-2-3}
+
+Rejected because it would have either required special hardware to be
+installed in the parking lots, or a critical mass of users feeding it
+data for it to be of any practical use.
+
+\subsection{Call of Halo: FPS}
+\label{sec-2-4}
+
+Rejected because it is far beyond the scope of this class, as well as
+difficulties securing rights to use the Halo and/or Call of Duty
+trademarks and intellectual property.
+
+\subsection{Class Schedule Helper}
+\label{sec-2-5}
+
+Rejected because any reasonably useful implentation would have been
+far too difficult to implement over the course of a single
+semester. Existing solutions to this problem are also already very good.
+
+\subsection{Calculator}
+\label{sec-2-6}
+
+Rejected for being far too simple.
+
+\section{Project Introduction}
+\label{sec-3}
+
+AceChat
+
+\subsection{Description}
+\label{sec-3-1}
+
+AceChat will be a multi-user chat application with a client/server
+architecture, allowing it to run on multiple platforms with minimal
+duplication of work. It will have public chat rooms, as well as
+private one-on-one chat between users.
+
+\subsection{Target Devices}
+\label{sec-3-2}
+
+\subsubsection{Web}
+\label{sec-3-2-1}
+
+The web component will run using HTML, CSS, and JavaScript. It will be
+a single page application, using javascript and AJAX or websockets to
+communicate with the server.
+
+\subsubsection{Desktop}
+\label{sec-3-2-2}
+
+The desktop client will be built using Java. Even though Java should
+work on other platforms, we will be targeting Windows as our supported
+platform.
+
+\subsection{Required Resources and Materials}
+\label{sec-3-3}
+
+\begin{itemize}
+\item Server for development and testing
+\item Client code
+\item Server code
+\item Windows computers to test desktop application
+\item Phones to test the web component on mobile
+\item Internet connectivity
+\item Database for data persistence
+\end{itemize}
+
+\section{Project Timeline}
+\label{sec-4}
+
+\subsection{Sprint \#1}
+\label{sec-4-1}
+
+\begin{itemize}
+\item Define a basic protocol for use by the client and server
+\item Set up a server for development and testing
+\item Design a user interface for the client
+\end{itemize}
+
+\subsubsection{Client (Desktop and Web)}
+\label{sec-4-1-1}
+
+\begin{itemize}
+\item Decide on a UI framework
+\item Implement basic user interface with no functionality
+\begin{itemize}
+\item Depends on User interface being designed
+\end{itemize}
+\item Add basic chat functionality to the user interface
+\begin{itemize}
+\item Depends on well defined protocol
+\item Depends on user interface being implemented
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Server}
+\label{sec-4-1-2}
+
+\begin{itemize}
+\item Implement basic chat protocol for use by clients
+\begin{itemize}
+\item Depends on well defined protocol
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Deliverable by End of Sprint}
+\label{sec-4-1-3}
+
+\begin{itemize}
+\item A working server implementation
+\item A web client, possibly with basic chat functionality
+\item A desktop client, possibly with basic chat functionality
+\end{itemize}
+
+\subsection{Sprint \#2}
+\label{sec-4-2}
+
+\begin{itemize}
+\item Testing and bug squashing
+\begin{itemize}
+\item Depends on a partially (at least) working server and client implementation
+\end{itemize}
+\item Implement fully working public and private chat functionality in
+desktop and client
+\item Begin adding extra features such as log-in, multi-line, public
+channel moderation, etc\ldots{}
+\begin{itemize}
+\item Depends on basic chat functionality working well
+\end{itemize}
+\end{itemize}
+
+\subsection{Sprint \#3 and \#4}
+\label{sec-4-3}
+
+\begin{itemize}
+\item Testing and bug squashing
+\item Implement any extra features
+\end{itemize}
+
+\subsection{Sprint \#5}
+\label{sec-4-4}
+
+This sprint will be solely about testing and bug squashing, as well as
+getting ready for the final presentation.
+
+\section{Production for Sprint \#1}
+\label{sec-5}
+
+\subsection{Roles}
+\label{sec-5-1}
+
+\subsubsection{Sprint Master}
+\label{sec-5-1-1}
+
+Daniel Dyla
+
+\subsubsection{Protocol Designer}
+\label{sec-5-1-2}
+
+\begin{itemize}
+\item Daniel Dyla
+\item Anthony Hewins
+\end{itemize}
+
+\subsubsection{User Interface Designer}
+\label{sec-5-1-3}
+
+\begin{itemize}
+\item Nathalie Tate
+\item Joshua Lindsay
+\end{itemize}
+
+\subsubsection{Software Engineer}
+\label{sec-5-1-4}
+
+\begin{itemize}
+\item Server
+\begin{itemize}
+\item Daniel Dyla
+\item Anthony Hewins
+\end{itemize}
+\item Desktop
+\begin{itemize}
+\item Gjergji Heqimi
+\end{itemize}
+\item Web
+\begin{itemize}
+\item Daniel Dyla
+\end{itemize}
+\end{itemize}
+
+\subsubsection{User Interface Developer}
+\label{sec-5-1-5}
+
+\begin{itemize}
+\item Desktop
+\begin{itemize}
+\item Ryan Richardson
+\end{itemize}
+\item Web
+\begin{itemize}
+\item Nathalie Tate
+\end{itemize}
+\end{itemize}
+
+\section{Tools and Technologies}
+\label{sec-6}
+
+\subsection{Development Platform}
+\label{sec-6-1}
+
+\subsubsection{Server}
+\label{sec-6-1-1}
+
+The server will run on a linux server and be implemented using either
+NodeJS and Javascript or Python and Flask. It will be a REST
+interface, allowing the clients to work with it seamlessly independent
+of their implementations. 
+
+The server implementation will be developed using vim, emacs, and
+sublime text as development environments in a python virtual
+environment or in a NodeJS project.
+
+The server implentation will use the Flask API framework if Python is
+used. If NodeJS is used, an API framework has not yet been decided
+on. It will also require libraries for communication using either
+sockets or websockets as well as database libraries for data
+persistence.
+
+\subsubsection{Desktop Client}
+\label{sec-6-1-2}
+
+The desktop client will be run on a Windows computer, communicating
+with the server using a REST API and/or a messaging interface over a
+network socket or a websocket.
+
+The desktop client will be implemented using the Netbeans Java IDE and
+target Java 7 on the Windows desktop environment.
+
+Our team has yet to decide on a UI framework to use for the desktop
+client, but it will require libraries for communication with the
+server over websockets, REST, and/or a network socket.
+
+\subsubsection{Web Client}
+\label{sec-6-1-3}
+
+The web client will be developed in HTML, CSS, and JavaScript It will
+target the Chrome web browser, but will hopefully work well with other
+browsers.
+
+The web client will use vim, emacs, and sublime text as development
+environments.
+
+The web client will require libraries for user interface, as well as
+for REST API and websocket communication with the server.
+
+\subsection{Additional Tools}
+\label{sec-6-2}
+
+\begin{itemize}
+\item The GIMP Graphics Editor
+\item Microsoft Paint
+\item Linux
+\item Microsoft Windows
+\item Chrome Web Browser
+\item Chrome Developer Tools
+\item htop performance monitoring
+\item Windows Task Manager
+\end{itemize}
+
+\section{Risk Analysis}
+\label{sec-7}
+
+We believe that we may experience problems getting the clients to work
+well with the server and with each other if they are developed
+entirely in isolation. In order to address this problem, we are going
+to be utilizing a test driven development methodology in order to
+verify that every module adheres strictly to the protocol
+specification.
+
+\section{Reference Materials}
+\label{sec-8}
+
+So far we have just used online web searches in order to find
+reference materials. We believe that we will have to use
+documentation for any programming languages that we use, as well as
+documentation for frameworks, libraries, and toolkits that we
+use. Specifically: \texttt{docs.python.org}, \texttt{devdocs.io/javascript}, and
+\texttt{flask.pocoo.org/docs/0.11/}, though we are sure that there will be
+others.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

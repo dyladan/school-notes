@@ -1,0 +1,5 @@
+#+TITLE: CSE 361 Lecture 10
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall

@@ -1,0 +1,120 @@
+% Created 2016-09-21 Wed 18:37
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\author{Daniel Dyla}
+\date{\today}
+\title{notes}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{eqv? vs equal?}
+\label{sec-1}
+
+\begin{itemize}
+\item equal? returns true if the elements are the same
+\item eqv? returns true if the elements are the same object in memory
+\end{itemize}
+
+\lstset{language=scheme,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(define a (range 2 5))
+(define b (range 2 5))
+(list (equal? a b)
+      (eqv? a b))
+\end{lstlisting}
+
+\section{tail recursion}
+\label{sec-2}
+
+\subsection{Factorial}
+\label{sec-2-1}
+
+\subsection{List Reversal}
+\label{sec-2-2}
+
+\subsection{Zip}
+\label{sec-2-3}
+
+\subsubsection{Normal Recursive}
+\label{sec-2-3-1}
+
+\lstset{language=scheme,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(define (zip l1 l2)
+  (cond
+   ((or (null? l1) (null? l2))
+    '())
+   (else
+    (cons
+     (list (car l1) (car l2))
+     (zip (cdr l1) (cdr l2))))))
+
+(zip '(3 4 2) '(9 2))
+\end{lstlisting}
+
+\subsubsection{Tail Recursive}
+\label{sec-2-3-2}
+
+\lstset{language=scheme,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(define (zip l1 l2 acc)
+  (cond
+   ((or (null? l1) (null? l2))
+    ; accumulator list is built in reverse
+    (reverse acc)) 
+   (else
+    (zip
+     (cdr l1)
+     (cdr l2)
+     (cons
+      (list (car l1) (car l2))
+      acc)))))
+
+(zip '(3 4 2) '(9 2 9) '())
+\end{lstlisting}
+
+\section{map}
+\label{sec-3}
+
+\begin{itemize}
+\item map a function onto a list $(map f lst)$
+\item map a function onto a list with 1 argument per call $(map f lst args)$
+\end{itemize}
+
+\lstset{language=scheme,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+(map + '(1 2 3) '(1 2 3))
+\end{lstlisting}
+
+\lstset{language=scheme,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+; only works on lists of equal length
+(define (zip l1 l2)
+  (map list l1 l2))
+
+(zip '(1 2 3) '(4 5 6))
+\end{lstlisting}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

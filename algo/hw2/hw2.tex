@@ -1,0 +1,183 @@
+% Created 2016-09-29 Thu 12:39
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\usepackage{geometry,listings,amsmath,amssymb,amsthm}
+\author{Daniel Dyla}
+\date{\today}
+\title{CSE 361 HW-2}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{3-2 Relative asymptotic growths}
+\label{sec-1}
+
+Indicate, for each pair of expressions $(A,B)$ in the table below,
+whether A is O, $\Omega$, or $\Theta$ of B. Assume $k \leq 1,
+\epsilon > 0, c > 1$ are constants. Your answer should be in the form
+of the table with "yes" or "no" written in each box.
+
+\begin{center}
+\begin{tabular}{ll|lll}
+A & B & O & $\Omega$ & $\Theta$\\
+\hline
+$\lg$$^{\text{k}}$(n) & n$^{\epsilon}$ & yes & no & no\\
+n$^{\text{k}}$ & c$^{\text{n}}$ & yes & no & no\\
+\sqrt{n} & n$^{\text{sin(n)}}$ & no & no & no\\
+2$^{\text{n}}$ & 2$^{\text{n/2}}$ & no & yes & no\\
+n$^{\lg\text{(c)}}$ & c$^{\lg\text{(n)}}$ & yes & yes & yes\\
+$\lg$(n!) & $\lg$(n$^{\text{n}}$) & yes & yes & yes\\
+ &  &  &  & \\
+\end{tabular}
+\end{center}
+
+\section{3-3 Ordering by asymptotic growth rates}
+\label{sec-2}
+
+\begin{itemize}
+\item Rank the following functions by order of growth; that is, find an
+arrangement $g_1, g_2,...,g_{30}$ of the functions satisfying $g_1 \in
+   \Omega(g_2), g_2 \in \Omega(g_3),...,g_{29} \in \Omega(g({30})$. Partition
+your list into equivalence classes such that the functions $f(n)$
+and $g(n)$ are in the same class if and only if $f(n) \in
+   \Theta(g(n))$.
+\end{itemize}
+
+
+1
+
+n$^{\text{1/lg n}}$
+
+lg lg$^{\text{*}}$ n
+
+lg$^{\text{*}}$ lg n
+
+lg$^{\text{*}}$ n
+
+2$^{\text{lg n}}$
+
+ln ln n
+
+\sqrt{lg n}
+
+ln n
+
+lg$^{\text{2}}$ n
+
+2$^{\sqrt{2 lg n}}$
+
+\sqrt{n}
+
+\sqrt{2}$^{\text{lg n}}$
+
+2$^{\text{lg n}}$
+
+n
+
+lg(n!)
+
+n lg n
+
+4$^{\text{lg n}}$
+
+n$^{\text{2}}$
+
+n$^{\text{3}}$
+
+(lg n)!
+
+n$^{\text{lg lg n}}$
+
+(lg n)$^{\text{lg n}}$
+
+(3/2)$^{\text{n}}$
+
+2$^{\text{n}}$
+
+n 2$^{\text{n}}$
+
+e$^{\text{n}}$
+
+n!
+
+(n+1)!
+
+2$^{\text{2}^{\text{n}}}$
+
+2$^{\text{2}^{\text{n+1}}}$
+
+\begin{itemize}
+\item Give an example of a single non-negative function f(n) such that for all
+functions g$_{\text{i}}$(n) in part 1, f(n) is neither O(g(n)) nor
+$\Omega$(g(n))
+\end{itemize}
+
+n!!$^{\text{sin(n)+1/2}}$
+
+\section{3-4 Asymptotic Notation Properties}
+\label{sec-3}
+
+Prove or disprove each of the following conjectures:
+
+\subsection{f(n) $\in$ O(g(n)) implies g(n) $\in$ O(f(n))}
+\label{sec-3-1}
+
+False. n $\in$ O(lg(n)) but lg(n) not $\in$ O(n)
+
+\subsection{f(n) + g(n) $\in$ $\Theta$(min(f(n),g(n)))}
+\label{sec-3-2}
+
+False. n + n$^{\text{2}}$ not $\in$ $\Theta$(n)
+
+\subsection{f(n) $\in$ O(g(n)) implies lg(f(n)) $\in$ O(lg(g(n)))}
+\label{sec-3-3}
+
+???
+
+\subsection{f(n) $\in$ O(g(n)) implies 2$^{\text{f(n)}}$ $\in$ O(2$^{\text{g(n)}}$)}
+\label{sec-3-4}
+
+False. f(n) = 2n, g(n) = n. 2$^{\text{2n}}$ not $\in$ O(2$^{\text{n}}$)
+
+\subsection{f(n) $\in$ O((f(n))$^{\text{2}}$)}
+\label{sec-3-5}
+
+False. f(n) = 1/n. 1/n not $\in$ O(1/n$^{\text{2}}$)
+
+\subsection{f(n) $\in$ O(g(n)) implies g(n) $\in$ $\Omega$(f(n))}
+\label{sec-3-6}
+
+True by definition. f(n) <= C g(n) for positive C, therefore 1/c f(n)
+<= g(n)
+
+\subsection{f(n) $\in$ $\Theta$(f(n/2))}
+\label{sec-3-7}
+
+2$^{\text{n}}$ not <= C 2$^{\text{n/2}}$ for big C
+
+\subsection{f(n) + \textit{o}(f(n)) $\in$ $\Theta$(f(n))}
+\label{sec-3-8}
+
+???
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

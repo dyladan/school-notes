@@ -1,0 +1,46 @@
+#+TITLE: CSE 361 Lecture 11
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall
+
+* Find all connected components
+
+#+BEGIN_SRC python
+  def components(G):
+      count = 0
+      for v in vertices(G):
+          if not visited[v]:
+              count = count + 1
+              BFS(G,v)
+      return count
+#+END_SRC
+
+* Depth first search
+
+- Topological sorting
+ - HINT DO THE TOPOLOGICAL SORT ON A GRAPH WITH NO TOPOLOGICAL SORT
+   AND MODIFY THE PROGRAM TO WORK
+
+** Recursive
+
+#+BEGIN_SRC python
+  def DFS(G, r):
+      e.visited = True
+      for e in r.neighbors:
+          if not e.visited:
+              DFS(G,e)
+#+END_SRC
+
+** Iterative version
+
+#+BEGIN_SRC python
+  def DFS2(G,r):
+      push(r)
+      while u = pop():
+          visited[u] = True
+          for v in neighbor(G,u):
+              if not visited[v]:
+                  push(v)
+              visited[u] = True
+#+END_SRC

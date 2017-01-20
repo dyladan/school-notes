@@ -1,0 +1,269 @@
+#+TITLE: Aces Sprint #0 Documentation
+#+AUTHOR:
+
+* The Team
+
+** Daniel Dyla
+
+Daniel is a strong coder with an extensive programming background
+using multiple programming languages and an experienced system
+administrator. His core strength is in learning new technologies
+quickly and adapting them for use.
+
+Daniel will be the sprint master for sprint #1, as well as acting as
+software engineer for the web and server components. He will also be
+helping to design the protocol for use by the application.
+
+** Gjergji Heqimi
+
+Gjergi Heqimi is a proficient programmer in Java, C++, and C
+programming languages, as well as decently skilled with Python.
+
+Gjergji will be acting as a software engineer for the desktop client
+for sprint #1.
+
+** Anthony Hewins
+
+Anthony Hewins is proficient in Java, as well as reasonably familiar
+with some other programming languages. He has a strong math background
+and is very good at research.
+
+Anthony will be acting as a software engineer for the server
+component, in addition to helping Daniel design the chat protocol that
+the application will use.
+
+** Joshua Lindsay
+
+Joshua Lindsay understands various programming languages including
+HTML, CSS, and C. He is very organized with files and data and is a
+proficient researcher.
+
+Joshua will be acting as the user interface designer for sprint #1
+
+** Ryan Richardson
+
+Ryan Richardson is competent in Java and C++.
+
+For sprint #1, Ryan will be acting as an interface developer for the
+desktop user interface.
+
+** Nathalie Tate
+
+Nathalie Tate is an intermediate programmer with experience with a few
+different programming languages. She is also a competent system
+administrator.
+
+For sprint #1, Nathalie will be working on the user interface deisgn,
+as well as acting as the interface developer for the web component.
+
+* Rejected Projects
+
+** Symmetric Key Encryption Module
+
+Rejected because it requires too much specialized knowledge to
+implement properly, as well as being too narrowly focused.
+
+** Beer Rating and Recommendation App
+
+Rejected because a portion of the team is not yet 21 years of age,
+limiting its usefulness to some members of the team.
+
+** Parking Monitor App
+
+Rejected because it would have either required special hardware to be
+installed in the parking lots, or a critical mass of users feeding it
+data for it to be of any practical use.
+
+** Call of Halo: FPS
+
+Rejected because it is far beyond the scope of this class, as well as
+difficulties securing rights to use the Halo and/or Call of Duty
+trademarks and intellectual property.
+
+** Class Schedule Helper
+
+Rejected because any reasonably useful implentation would have been
+far too difficult to implement over the course of a single
+semester. Existing solutions to this problem are also already very good.
+
+** Calculator
+
+Rejected for being far too simple.
+
+* Project Introduction
+
+AceChat
+
+** Description
+
+AceChat will be a multi-user chat application with a client/server
+architecture, allowing it to run on multiple platforms with minimal
+duplication of work. It will have public chat rooms, as well as
+private one-on-one chat between users.
+
+** Target Devices
+
+***  Web
+
+The web component will run using HTML, CSS, and JavaScript. It will be
+a single page application, using javascript and AJAX or websockets to
+communicate with the server.
+
+*** Desktop
+
+The desktop client will be built using Java. Even though Java should
+work on other platforms, we will be targeting Windows as our supported
+platform.
+
+** Required Resources and Materials
+
+- Server for development and testing
+- Client code
+- Server code
+- Windows computers to test desktop application
+- Phones to test the web component on mobile
+- Internet connectivity
+- Database for data persistence
+
+* Project Timeline
+
+** Sprint #1
+
+- Define a basic protocol for use by the client and server
+- Set up a server for development and testing
+- Design a user interface for the client
+
+*** Client (Desktop and Web)
+
+- Decide on a UI framework
+- Implement basic user interface with no functionality
+ - Depends on User interface being designed
+- Add basic chat functionality to the user interface
+ - Depends on well defined protocol
+ - Depends on user interface being implemented
+
+*** Server
+
+- Implement basic chat protocol for use by clients
+ - Depends on well defined protocol
+
+*** Deliverable by End of Sprint
+
+- A working server implementation
+- A web client, possibly with basic chat functionality
+- A desktop client, possibly with basic chat functionality
+
+** Sprint #2
+
+- Testing and bug squashing
+ - Depends on a partially (at least) working server and client implementation
+- Implement fully working public and private chat functionality in
+  desktop and client
+- Begin adding extra features such as log-in, multi-line, public
+  channel moderation, etc...
+ - Depends on basic chat functionality working well
+
+** Sprint #3 and #4
+
+- Testing and bug squashing
+- Implement any extra features
+
+** Sprint #5
+
+This sprint will be solely about testing and bug squashing, as well as
+getting ready for the final presentation.
+
+* Production for Sprint #1
+
+** Roles
+
+*** Sprint Master
+
+Daniel Dyla
+
+*** Protocol Designer
+
+- Daniel Dyla
+- Anthony Hewins
+
+*** User Interface Designer
+
+- Nathalie Tate
+- Joshua Lindsay
+
+*** Software Engineer
+
+- Server
+ - Daniel Dyla
+ - Anthony Hewins
+- Desktop
+ - Gjergji Heqimi
+- Web
+ - Daniel Dyla
+
+*** User Interface Developer
+
+- Desktop
+ - Ryan Richardson
+- Web
+ - Nathalie Tate
+
+* Tools and Technologies
+
+** Development Platform
+
+*** Server
+
+The server will run on a linux server and be implemented using either
+NodeJS and Javascript or Python and Flask. It will be a REST
+interface, allowing the clients to work with it seamlessly independent
+of their implementations. 
+
+The server implementation will be developed using vim, emacs, and
+sublime text as development environments in a python virtual
+environment or in a NodeJS project.
+
+The server implentation will use the Flask API framework if Python is
+used. If NodeJS is used, an API framework has not yet been decided
+on. It will also require libraries for communication using either
+sockets or websockets as well as database libraries for data
+persistence.
+
+*** Desktop Client
+
+The desktop client will be run on a Windows computer, communicating
+with the server using a REST API and/or a messaging interface over a
+network socket or a websocket.
+
+The desktop client will be implemented using the Netbeans Java IDE and
+target Java 7 on the Windows desktop environment.
+
+Our team has yet to decide on a UI framework to use for the desktop
+client, but it will require libraries for communication with the
+server over websockets, REST, and/or a network socket.
+
+*** Web Client
+
+The web client will be developed in HTML, CSS, and JavaScript It will
+target the Chrome web browser, but will hopefully work well with other
+browsers.
+
+The web client will use vim, emacs, and sublime text as development
+environments.
+
+The web client will require libraries for user interface, as well as
+for REST API and websocket communication with the server.
+
+** Additional Tools
+
+- The GIMP Graphics Editor
+- Microsoft Paint
+- Linux
+- Microsoft Windows
+- Chrome Web Browser
+- Chrome Developer Tools
+- htop performance monitoring
+- Windows Task Manager
+
+* Risk Analysis
+

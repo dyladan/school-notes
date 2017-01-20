@@ -1,0 +1,99 @@
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t
+#+OPTIONS: html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+
+* Sorting functions
+
+** Insertion Sort
+
+#+BEGIN_SRC c
+  void iisort(int *a, int n) 
+  {
+    int i, j, t;
+    for (i = 1; i < n; i++)
+      {
+        for (j = i; j > 0 && a[j-1] > a[j]; j--) 
+          {
+            // inline swap
+            t = a[j-1]; a[j-1] = a[j]; a[j] = t;
+            // function swap
+            // swap(j, j-1, a);
+          }
+      }
+  }
+
+#+END_SRC
+
+
+** Quicksort
+
+#+BEGIN_SRC c
+  void iqsort(int *a, int n)
+  {
+    int i, j, t;
+    if (n <= 1) return;
+    for(i=1,j=0;i<n;i++)
+      if (a[i] < a[0])
+        {
+          // swap(++j, i, a);
+          j++;
+          t = a[j]; a[j] = a[i]; a[i] = t;
+        }
+    // swap(j, 0, a);
+    t = a[j]; a[j] = a[0]; a[0] = t;
+    iqsort(a, j);
+    iqsort(a+j+1, n-j-1);
+  }
+#+END_SRC
+
+* Speed Analysis
+
+Table columns represent methods of generating an array. Row groups
+represent different swapping methods. Rows represent measured values
+after profiling the sorting functions. The time differences are
+measured in microseconds.
+
+
+| inline swaps   | mod50000 |   mod5 |                   mod2 |  desc | asc    |
+|----------------+----------+--------+------------------------+-------+--------|
+| T(i) < T(q)    | n < 12   | n < 20 | n < 115; 180 < n < 310 | n < 9 | all n  |
+| n at peak diff | 8,9      |  15,16 |                    280 |     7 | 0 << n |
+| peak time diff | 0.07     |   0.18 |                  30.79 |  0.03 | N/A    |
+|----------------+----------+--------+------------------------+-------+--------|
+| function swaps | mod50000 |   mod5 |                   mod2 |  desc | asc    |
+|----------------+----------+--------+------------------------+-------+--------|
+| T(i) < T(q)    | never    |     12 |                 n < 66 | n < 7 | all n  |
+| n at peak diff | N/A      |      8 |                     65 |     3 | 0 << n |
+| peak time diff | N/A      |   0.17 |                   0.35 |  0.02 | N/A    |
+
+
+Based on this analysis it is my conclusion that even the most naive
+quicksort beats an insertion sort by a healthy margin for almost all
+classes of inputs other than very small arrays. Those small arrays are
+larger as the input becomes less random and has more repeated
+elements. Further, when a swap is more costly (as in the case of a
+function call rather than inline code), the quicksort function gains a
+larger advantage than the inline sort. In the special case of a sorted
+or mostly sorted array, the inline sort is always faster than
+qsort. It is possible that a smarter partitioning scheme for the
+quicksort could have improved its standing against the inline sort.
+
+It is also worth noting that the stdlib qsort (originally proposed in
+Engineering a Sort Function by Bentley and McIlroy) is actually slower
+than even the naive qsort used for this paper for arrays of random
+integers, though it is constrained by the assumptions of a library
+sort that this quicksort is not. Namely, it has to handle all cases
+at least reasonably well and cannot afford to overly optimize for
+specific cases. This just showcases the tradeoffs that must be made
+for a library sort. The moral of the story is never to stop
+questioning your tools.

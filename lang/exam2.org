@@ -1,0 +1,70 @@
+#+BEGIN_SRC lisp
+  (define-datatype step step?
+    (up-step (n number?))
+    (down-step (n number?))
+    (left-step (n number?))
+    (right-step (n number?))
+    (seq-step (s1 step?) (s2 step?)))
+
+  (define lexical-spec
+    '(
+      (whitespace (whitespace) skip)
+      (comment ("#" (arbno (not #\newline))) skip)
+      (number (digit (arbno digit) number))
+      (number ("-" digit (arbno digit)) number)
+      (identifier (letter (arbno (or letter digit "-" "_" "?"))) symbol)
+      )
+    )
+
+  (define grammar-spec
+    '(
+      (program (expr (arbno expr)) a-program)
+      (expr (number) num-expr)
+      (expr ("up" "(" expr ")") up-expr)
+      (expr ("down" "(" expr ")") down-expr)
+      (expr ("left" "(" expr ")") left-expr)
+      (expr ("right" "(" expr ")") right-expr)
+      (expr ("(" expr expr ")") point-expr)
+      
+      (expr ("+" expr expr) add-expr)
+      (expr ("origin?" "(" expr ")") origin-expr)
+      (expr ("if" "(" expr ")" "then" expr "else" expr) if-expr)
+      (expr ("move" "(" expr expr (arbno expr) ")") move-expr)
+      
+      (expr ("{" (arbno var-expr) (arbno expr) "}") block-expr)
+      (expr (identifier) iden-expr)
+      (var-expr ("val" identifier "=" expr) val)
+      (var-expr ("final val" identifier "=" expr) final-val)
+      )
+    )
+
+  (define (run program-string)
+    (value-of (create-ast program-string) (empty-env)))
+
+  (define (value-of ast env)
+    (cond 
+      [(program? ast) (value-of-program ast env)]
+      [(expr? ast) (value-of-expr ast env)]
+      [(var-expr? ast) (value-of-var ast env)]
+      [else (raise (~a "Unimplemented ast node: " ~a ast))]
+      )
+    )
+
+  (define (value-of-program prog env)
+    (cases program prog
+      (a-program
+       (expr rest-of-expressions)
+       (andmap (lambda (ex) (value-of ex env))
+               (flat-list expr rest-of-expressions))
+       )
+      )
+    )
+
+  (sllgen:make-define-datatypes lexical-spec grammar-spec)
+  (define (show-data-types)
+    (sllgen:list-define-datatypes lexical-spec grammar-spec))
+  (define create-ast
+    (sllgen:make-string-parser lexical-spec grammar-spec))
+  (define just-scan
+    (sllgen:make-string-scanner lexical-spec grammar-spec))
+#+END_SRC

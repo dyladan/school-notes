@@ -1,0 +1,46 @@
+#+TITLE: CSE 361 Lecture 9
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall
+
+* Random element from a pipe
+
+Get a random element from a pipe using as little storage as possible.
+
+#+BEGIN_SRC python
+  import random
+
+  def getrand(l):
+          n = 0
+          c = None
+          for e in l:
+                  n += 1
+                  r = random.randint(1, n)
+                  if r == 1:
+                          c = e
+          return c
+
+  getrand(range(11))
+#+END_SRC
+
+#+RESULTS:
+: 8
+
+* Sorting
+
+** Binsort
+
+- Sort into bins
+- No comparisons!
+- Faster than n log n sometimes
+
+#+BEGIN_SRC python
+  #sort 2 digit numbers
+  def binsort(a):
+      put elements into bins by last digit
+      for bin in bins:
+          put elements into bins by first digit
+      read elements in order of bins
+
+#+END_SRC 

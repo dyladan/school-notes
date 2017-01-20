@@ -1,0 +1,420 @@
+% Created 2016-10-11 Tue 16:56
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\usepackage{geometry,listings,amsmath,amssymb,amsthm}
+\author{Daniel Dyla}
+\date{\today}
+\title{CSE 361 Lecture Notes}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\section{Sums}
+\label{sec-1}
+
+\subsection{Sum of constant}
+\label{sec-1-1}
+
+\begin{align}
+\sum_{i=k}^n c &= c + c + c + c + ... + c \\
+&= n - k + 1
+\end{align}
+
+\subsection{Sum of integers}
+\label{sec-1-2}
+
+\begin{align}
+\sum_{i=0}^n i &= 0 + 1 + 2 + 3 + ... + n \\
+&= \frac{n(n+1)}{2}
+\end{align}
+
+\subsection{Sum of squares}
+\label{sec-1-3}
+
+\begin{align}
+\sum_{i=0}^n i^2 &= 0 + 1 + 4 + 9 + ... + n^2 \\
+&= \frac{n(n+1)(2n+1)}{3}
+\end{align}
+
+
+\section{Complexity}
+\label{sec-2}
+
+\begin{itemize}
+\item Big Theta has upper and lower bound
+\item Big Omega has lower bound
+\item Big Oh (Omnicron) has upper bound
+\end{itemize}
+
+\section{Recursive Complexity}
+\label{sec-3}
+
+\begin{enumerate}
+\item Take the base case
+\item Take other cases
+\item Expand and solve
+\end{enumerate}
+
+\subsection{Simple Case}
+\label{sec-3-1}
+
+How many times is the function $f()$ run?
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def r(n):
+  f()
+  if n == 1:
+    return 5
+  else:
+    return r(n-1)
+\end{lstlisting}
+
+\[ T(n) = 
+\begin{cases}
+1 & n = 1 \\
+1 + T(n-1) & else \\
+\end{cases}
+\]
+
+\begin{align}
+  T(n) &= 1 + T(n-1) \\
+  &= 1 + 1 + T(n-2) \\
+  &= 1 + 1 + 1 + T(n-3) \\
+  &= 1 + 1 + 1 + 1 + T(n-4) \\
+  &= 1 + 1 + 1 + 1 + ... + 1 \\
+  &= n
+\end{align}
+
+\subsection{More Complex Case}
+\label{sec-3-2}
+
+How many times is the function $f()$ run?
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def r(n):
+  f()
+  if n == 1:
+    return 5
+  else:
+    return r(n/2)
+\end{lstlisting}
+
+\[ T(n) = 
+\begin{cases}
+1 & n = 1 \\
+1 + T(n/2) & else \\
+\end{cases}
+\]
+
+\begin{align}
+  T(n) &= 1 + T(n/2) \\
+  &= 1 + (1 + T(n/4)) \\
+  &= 1 + (1 + (1 + T(n/8))) \\
+  &= 1 + \log_2 n
+\end{align}
+
+\section{prove 2n$^{\text{3}}$ - n$^{\text{2}}$ + n -2 $\in$ $\Theta$(n$^{\text{3}}$)}
+\label{sec-4}
+
+Claim: there is a C$_{\text{1}}$, C$_{\text{2}}$, n$_{\text{0}}$ such that $C_1 n^3 <= 2n^3 - n^2 + n
+-2<= C_2 n^3 \forall n >= n_0$
+
+C$_{\text{1}}$ = 1, C$_{\text{2}}$ = 3, n$_{\text{0}}$ = 2
+
+\section{Analyze the function}
+\label{sec-5}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def mystery(n):
+    t = 0
+    for i in range(1, n+1):
+	s = 1
+	for j in range(1, n+1):
+	    s = s * j
+	t = t + s
+    return t
+
+mystery(5)
+\end{lstlisting}
+
+\subsection{What does it do?}
+\label{sec-5-1}
+
+The sum of all factorials from 0 to n.
+
+\begin{itemize}
+\item The inner loop computes factorials
+\item The outer loop sums those factorials
+\end{itemize}
+
+\subsection{Runtime}
+\label{sec-5-2}
+
+\begin{align}
+  T(n) &= 1 + \sum_{i=1}^{n}(2 + \sum_{j=1}^{n} 1) \\
+  &= 1 + \sum_{i=1}^{n} (2+n) \\
+  &= 1 + n(2+n) \\
+  &= n^2 + 2n + 1 \\
+  &\in \Theta(n^2)
+\end{align}
+
+\section{Lecture 5}
+\label{sec-6}
+
+Mostly we talked about HW-1 today. See hw1.org.
+
+\subsection{Problem}
+\label{sec-6-1}
+
+Given an increasing function $f(x)$, defined for non-negative x, and a
+number $T$, find a number $z \in [0,\infinity]$, such that $f(z) =
+T$. $f$ is expensive.
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def increase(n):
+    return 2 * n
+
+def binsearch(f, T, a, b, e=0.1):
+    while 1:
+	m = (float(a) + b) / 2
+	fm = f(m)
+	err = (fm - T) ** 2
+	if (err < e ** 2):
+	    return fm
+	elif fm < T:
+	    a = m
+	else:
+	    b = m
+
+def find_z(f, T, e=0.1):
+    a, b = 0, 1
+    while (f(b) < T):
+	a = b
+	b = increase(b)
+
+    z = binsearch(f, T, a, b)
+    return z
+\end{lstlisting}
+
+Initial search runs in $f'(T)$. Binary search runs in
+$log_2((b-a)/\epsilon)$.
+
+\begin{align}
+  R(f, T) &= \log_2(f'(T)) + \log_2(\frac{b-a}{\epsilon}) \\
+  &= \log_2(f'(T)) + \log_2(\frac{\frac{f'(T)}{2}}{\epsilon}) \\
+  &\in \Theta(\log_2(f'(T)))
+\end{align}
+
+\section{Lecture 6}
+\label{sec-7}
+
+Given an array of real numbers, find a contiguous subarray with the
+largest possible sum.
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def A0(l):
+    n = len(l)
+    large = l[0]
+    for i in range(n):
+	for j in range(i,n):
+	    large = max(large, sum(l[i:j+1]))
+    return large
+
+l = [1, 3, 4, 2, -7, 5]
+A0(l)
+\end{lstlisting}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def A1(l):
+    n,largest = len(l),0
+    for i in range(n):
+	s = 0
+	for j in range(i,n):
+	    s += l[j]
+	    largest = max(s,largest)
+    return largest
+
+A1(l)
+\end{lstlisting}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def A2(l):
+    c = [0]
+    for i in range(len(l)):
+	c.append(c[i] + l[i])
+    largest = 0
+    for i in range(len(l)):
+	for j in range(i, len(l)):
+	    s = c[j+1] - c[i]
+	    largest = max(s, largest)
+    return largest
+
+
+
+A2(l)
+\end{lstlisting}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def A3(a):
+    n = len(a)
+    m = n//2
+    a1 = a[:n]
+    a2 = a[n:]
+    l = n-1
+    r = n
+    c = [0]
+    for i in range(n):
+	c.append(c[i]+a[i])
+\end{lstlisting}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def A4(a):
+    mf, mh = 0, 0
+    for i in a:
+	mh = max(mh+i, 0)
+	mf = max(mf,mh)
+    return mf
+
+A4(l)
+\end{lstlisting}
+
+\subsection{Homework}
+\label{sec-7-1}
+
+maximum product of 3 elements in the array
+
+\section{Lecture 7}
+\label{sec-8}
+
+\section{Test 1 Prep}
+\label{sec-9}
+
+\begin{itemize}
+\item Verify Strassen at least once before the test
+\item if T(m) >= T'(m), then T(m) $\in$ $\Omega$(T'(m))
+\item if T(m) <= T'(m), then T(m) $\in$ O(T'(m))
+\end{itemize}
+
+\section{Exam}
+\label{sec-10}
+
+\subsection{Page 2}
+\label{sec-10-1}
+
+Count the arithmetic operations
+
+sum from 0 to n-1
+
+Don't forget T(n) where n is the length of the array
+
+\subsection{Page 3}
+\label{sec-10-2}
+
+It evaluates the polynomial at x
+
+Code is efficient because it is in $\Theta$(n) where the natural way to
+evaluate polynomials is in $\Theta$(n$^{\text{2}}$)
+
+Horner's algorithm
+
+9 = C(10$^{\text{4}}$)$^{\text{7/2}}$; 9 = C10$^{\text{14}}$; C = 9x10$^{\text{-14}}$; x = C10$^{\text{14}}$
+Solve for x
+
+\subsection{Page 4}
+\label{sec-10-3}
+
+Efficient algorithms for the maximum subarray problem by distance 
+
+"kadane's algorithm"
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+m = 0
+subarray = [[0]]
+for each row r1 in matrix:
+    for each element e1 in r1:
+	for each row r2 below r1:
+	    for each element e2 right of e1:
+		s = 0
+		for each row r3 from r2 to the end:
+		    for each element e3 from e2 to the end:
+			s += a[r3,e3]
+		if s > m:
+		    m = s
+		    subarray = submatrix(r1,r2,e1,e2)
+\end{lstlisting}
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def msum(a):
+    m = len(a) # row
+    n = len(a[0]) # col
+    best = a[0][0]
+    idxs = [0,0,0,0]
+    for tlrow in range(m):
+	for tlcol in range(n):
+	    for brrow in range(tlrow,m):
+		for brcol in range(tlcol,n):
+		    s=arrsum(a,tlrow,tlcol,brrow,brcol)
+		    if s > best:
+			best,idxs = s, [tlrow,tlcol,brrow,brocl]
+    return best
+
+def arrsum(a,tlr,tlc,brr,brc):
+    s = 0
+    for i in range(tlr,brr+1):
+	for j in range(trc,brc+1):
+	    s += a[i][j]
+    return s
+
+arrsum([[1,2][3,4]],0,0,1,1)
+\end{lstlisting}
+
+Count \# of times "s += a[i][j] is called
+
+\subsection{Page 5}
+\label{sec-10-4}
+
+All true
+
+set \{g(n) | $\exists$ c, n$_{\text{0}}$>0 g(n) $\le$ cf(n), $\forall$ n $\ge$ n$_{\text{0}}$\}
+
+set \{g(n) | $\exists$ c, n$_{\text{0}}$>0 g(n) $\ge$ cf(n), $\forall$ n $\ge$ n$_{\text{0}}$\}
+
+\[ T(n) = 
+\begin{cases}
+  1 & n \leq 1 \\
+  1 + T(n-1) + T(n-2) + 1 & else \\
+\end{cases}
+\]
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

@@ -1,0 +1,61 @@
+% Created 2016-09-15 Thu 16:21
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{listings}
+\author{Daniel Dyla}
+\date{\today}
+\title{quiz1}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+What does this function do and what is its runtime?
+
+\lstset{language=Python,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+def m(n):
+    t = 1
+    for i in range(n-1):
+	for j in range(i+1, n):
+	    t = 2*t
+    return t
+\end{lstlisting}
+
+It returns $2^{r}$ where $r$ is the number of times $t = 2*t$ is
+called (runtime).
+
+\begin{align}
+  T(n) &= \sum_{i=0}^{n-2} \sum_{j=i+1}^{n-1} 1 \\
+  &= \sum_{i=0}^{n-2} (n-1) - (i+1) + 1 \\
+  &= \sum_{i=0}^{n-2} (n - i - 1) \\
+  &= \sum_{i=0}^{n-2} (n - 1) - \sum_{i=0}^{n-2} i \\
+  &= (n - 1)(n - 2 - 0 + 1) - \frac{(n-2)(n-1)}{2} \\
+  &= (n - 1)(n - 1) - \frac{(n-2)(n-1)}{2} \\
+  &= (n-1)((n-1) - \frac{n-2}{2}) \\
+  &= (n-2)(\frac{n}{n}) \\
+  &= \frac{n(n-1)}{2}
+\end{align}
+
+Therefore, the function returns $2^{r}$ where $r = n(n-1)/2$.
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

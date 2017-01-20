@@ -1,0 +1,138 @@
+#+TITLE: CSE 361 HW-2
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall
+
+* 3-2 Relative asymptotic growths
+
+Indicate, for each pair of expressions $(A,B)$ in the table below,
+whether A is \Omicron, \Omega, or \Theta of B. Assume $k \leq 1,
+\epsilon > 0, c > 1$ are constants. Your answer should be in the form
+of the table with "yes" or "no" written in each box.
+
+| A          | B          | \Omicron | \Omega | \Theta |
+|------------+------------+----------+--------+--------|
+| /          | >          |          |        |        |
+| \lg^k(n)   | n^\epsilon | yes      | no     | no     |
+| n^k        | c^n        | yes      | no     | no     |
+| \sqrt{n}   | n^{sin(n)} | no       | no     | no     |
+| 2^n        | 2^{n/2}    | no       | yes    | no     |
+| n^{\lg(c)} | c^{\lg(n)} | yes      | yes    | yes    |
+| \lg(n!)    | \lg(n^n)   | yes      | yes    | yes    |
+|            |            |          |        |        |
+
+* 3-3 Ordering by asymptotic growth rates
+
+-  Rank the following functions by order of growth; that is, find an
+   arrangement $g_1, g_2,...,g_{30}$ of the functions satisfying $g_1 \in
+   \Omega(g_2), g_2 \in \Omega(g_3),...,g_{29} \in \Omega(g({30})$. Partition
+   your list into equivalence classes such that the functions $f(n)$
+   and $g(n)$ are in the same class if and only if $f(n) \in
+   \Theta(g(n))$.
+
+
+1
+
+n^{1/lg n}
+
+lg lg^* n
+
+lg^* lg n
+
+lg^* n
+
+2^{lg n}
+
+ln ln n
+
+\sqrt{lg n}
+
+ln n
+
+lg^2 n
+
+2^{\sqrt{2 lg n}}
+
+\sqrt{n}
+
+\sqrt{2}^{lg n}
+
+2^{lg n}
+
+n
+
+lg(n!)
+
+n lg n
+
+4^{lg n}
+
+n^2
+
+n^3
+
+(lg n)!
+
+n^{lg lg n}
+
+(lg n)^{lg n}
+
+(3/2)^n
+
+2^n
+
+n 2^n
+
+e^n
+
+n!
+
+(n+1)!
+
+2^{2^n}
+
+2^{2^{n+1}}
+
+- Give an example of a single non-negative function f(n) such that for all
+  functions g_i(n) in part 1, f(n) is neither \Omicron(g(n)) nor
+  \Omega(g(n)) 
+
+n!!^{sin(n)+1/2}
+
+* 3-4 Asymptotic Notation Properties
+
+Prove or disprove each of the following conjectures:
+
+** f(n) \in \Omicron(g(n)) implies g(n) \in \Omicron(f(n))
+
+False. n \in \Omicron(lg(n)) but lg(n) not \in \Omicron(n)
+
+** f(n) + g(n) \in \Theta(min(f(n),g(n)))
+
+False. n + n^2 not \in \Theta(n)
+
+** f(n) \in \Omicron(g(n)) implies lg(f(n)) \in \Omicron(lg(g(n)))
+
+???
+
+** f(n) \in \Omicron(g(n)) implies 2^{f(n)} \in \Omicron(2^{g(n)})
+
+False. f(n) = 2n, g(n) = n. 2^{2n} not \in \Omicron(2^n)
+
+** f(n) \in \Omicron((f(n))^2)
+
+False. f(n) = 1/n. 1/n not \in \Omicron(1/n^2)
+
+** f(n) \in \Omicron(g(n)) implies g(n) \in \Omega(f(n))
+
+True by definition. f(n) <= C g(n) for positive C, therefore 1/c f(n)
+<= g(n)
+
+** f(n) \in \Theta(f(n/2))
+
+2^n not <= C 2^{n/2} for big C
+
+** f(n) + \omicron(f(n)) \in \Theta(f(n))
+
+???

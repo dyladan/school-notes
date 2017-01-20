@@ -1,0 +1,66 @@
+import random
+import time
+
+# Given an array , find two elements ,
+# if there are such two, that sum to zero.
+def zero_sum(a):
+    for i in range(len(a)-1):
+        for j in range(i+1,len(a)):
+            if a[i]+a[j] == 0:
+                return i , j
+    return -1, -1
+
+def zero_sum_s ( a ) :
+    a = sorted(a)
+    l,r = 0, len(a)-1
+    while l < r:
+        s = a[l]+a[r]
+        if s==0:
+            return a[l],a[r]
+        elif s<0:
+            l = l+1
+        elif s>0:
+            r = r-1
+    return None,None
+
+def zero_sum_smartest(a):
+    s = {}
+    for i,e in enumerate(a):
+        if -e in s:
+            return i, s[-e]
+        else:
+            s[e] = i
+    return None
+
+def randarray(len):
+    return [random.randint(000000, +1000000) for i in range(len)]
+
+def timeit(func, arrsize, iterations=20):
+    # run for a number of iterations and return the average runtime
+    # in milliseconds
+    l = []
+    for i in range(iterations):
+        a = randarray(arrsize)
+        start = time.time()
+        func(a)
+        end = time.time()
+        l.append(1000* (end-start))
+    return reduce(lambda x, y: x+y, l) / float(len(l))
+
+def main():
+    i, b, o, s = [],[],[],[]
+    for n in range(10, 1000, 10):
+        i.append(str(n))
+        b.append(timeit(zero_sum, n))
+        o.append(timeit(zero_sum_s, n))
+        s.append(timeit(zero_sum_smartest, n))
+        bs = map("{:.3f}".format, b)
+        os = map("{:.3f}".format, o)
+        ss = map("{:.3f}".format, s)
+    print "," + ",".join(i)
+    print "brute," + ",".join(bs)
+    print "smarter," + ",".join(os)
+    print "smartest," + ",".join(ss)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,57 @@
+#+TITLE: PHL104 Oct 11
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{geometry,listings,amsmath,amssymb,amsthm}
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+STARTUP: showall
+
+* Kant
+
+- Autonomous will
+ - "self law" will
+- Heteronomous will
+ - "different law" will
+ - "other law" will
+
+Are you in control of your own actions?
+
+Kant believes that actions cannot be morally praiseworthy if you are
+being controlled by your heteronomous will. 
+
+** Duty and Will
+
+- An action is morally praiseworthy iff one recognizes it to be one's
+  duty.
+- The central question: Is the action contaminated by some
+  inclination?
+ - If yes, then the action proceeds from heteronomous will. It is not
+   determined by reason, but rather by irrational influences - things
+   like happiness, pleasure, and fear.
+ - If no, then the action proceeds from the autonomous will. It is the
+   action of the self, unassisted by "other" things. It is rational.
+
+** Hypothetical Imperative
+
+A command that must be followed in order to obtain some desired end.
+
+- If you want to be happy, then follow your dreams.
+- If you want to avoid salt, then don't eat canned soups.
+
+** Categorical Imperative
+
+A command that must be followed at all times, no matter what
+inclinations or desires one happens to have. There are two version,
+which are supposed to be equivalent, but might not be.
+
+1. Always act in such a way that you could will the maxim of your
+   action to become a universal law.
+2. Act in such a way that you treat every human being as an end in
+   himself, and never merely as a means to your own end.
+
+** Maxim
+
+A maxim is the motivational grounding for an action.
+
+- When in distress, I will make a promise without the intention of
+  keeping it.
+- If I feel an overwhelming desire to do so, I will pig out on
+  Doritoes.
