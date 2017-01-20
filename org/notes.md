@@ -119,10 +119,10 @@ Label5: // <= Program will jump here if X10 is 0
 SUB X22, X22, X23
 CBNZ X22, ElseLabel
 ADD X19, X20, X21
-GOTO End
+B End
 ElseLabel:
 SUB X19, X20, X21
-GOTO End
+B End
 End:
 ```
 
