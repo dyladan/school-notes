@@ -101,25 +101,29 @@ of the instruction.
 
 ## Compare and branch if zero
 
-    // if X10 == 0 GOTO label5
-    ...
-    CBZ X10, Label5
-    ...
-    ...
-    Label5: // <= Program will jump here if X10 is 0
-    ...
-    ...
+```
+// if X10 == 0 GOTO label5
+...
+CBZ X10, Label5
+...
+...
+Label5: // <= Program will jump here if X10 is 0
+...
+...
 
+```
 
-    // f - j are X19 - X23
-    // if (i == j) f = g + h; else f = g - h;
-    SUB X22, X22, X23
-    CBNZ X22, ElseLabel
-    ADD X19, X20, X21
-    GOTO End
-    ElseLabel:
-    SUB X19, X20, X21
-    GOTO End
-    End:
+```
+// f - j are X19 - X23
+// if (i == j) f = g + h; else f = g - h;
+SUB X22, X22, X23
+CBNZ X22, ElseLabel
+ADD X19, X20, X21
+GOTO End
+ElseLabel:
+SUB X19, X20, X21
+GOTO End
+End:
+```
 
 
