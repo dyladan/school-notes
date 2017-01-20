@@ -94,6 +94,7 @@ of the instruction.
     // X9 = X10 & X11
     AND X9, X10, X11
 
+
 # Instructions for Making Decisions
 
     if, else, switch, case, while, for
@@ -109,5 +110,16 @@ of the instruction.
     ...
     ...
 
+
+    // f - j are X19 - X23
+    // if (i == j) f = g + h; else f = g - h;
+    SUB X22, X22, X23
+    CBNZ X22, ElseLabel
+    ADD X19, X20, X21
+    GOTO End
+    ElseLabel:
+    SUB X19, X20, X21
+    GOTO End
+    End:
 
 
